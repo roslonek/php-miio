@@ -1,39 +1,39 @@
-# php-miio
-
-**miIO** - проприетарный шифрованный сетевой протокол Xiaomi, по которому взаимодействуют между собой wifi-устройства из экосистемы Xiaomi (Mi Home). Используется транспорт UDP и порт 54321. Ключ шифрования формируется на основе уникального токена, который есть у каждого устройства.
-
-Функционал разделен и описан классами.
-
-`miio.class.php` - класс для сетевого взаимодействия по протоколу **miIO**:
-*	прием udp-пакетов из сокета
-*	отправка udp-пакетов в сокет
-*	процедура рукопожатия (handshake)
-*	отправка сообщений устройству
-*	прием ответов от устройства
-*	поиск устройств (handshake-discovery)
-
-`mipacket.class.php` - класс для работы с сетевыми udp-пакетами по протоколу **miIO**:
-*	генерация ключа и вектора инициализации из токена
-*	расшифровка
-*	шифрование
-*	парсинг udp-пакета
-*	сборка udp-пакета
 
 
-В качестве примера взаимодействия с устройствами написан скрипт для командной строки `miio-cli.php`.
-Принимаемые параметры:
-  *	`--discover all`	- поиск устройств в локальной сети и вывод информации о них
-  *	`--discover IP`   - проверка доступности конкретного устройства и вывод информации о нем
-  *	`--info`	        - получить информацию об устройстве (аналог --discover IP)
-  *	`--sendcmd`       - отправить команду (в linux д.б. заключена в одинарные кавычки, в windows без них)
-  * `--decode`       -	расшифровать пакет
-  *	`--ip`            - IP-адрес устройства
-  *	`--bindip`		- IP-адрес интерфейса сервера (не обязательно, если интерфейс один)
-  *	`--token`         - токен устройства (не обязательно)
-  *	`--debug`         - включает вывод отладочной информации
-  *	`--help`          - справка по командам
 
-Примеры:
+
+
+
+
+** miIO ** - Xiaomi's proprietary encrypted network protocol, through which wifi devices from the Xiaomi ecosystem (Mi Home) interact with each other. UDP transport and port 54321 are used. The encryption key is generated based on a unique token that each device has.
+
+The functionality is separated and described by classes.
+
+`miio.class.php` - class for network communication using the ** miIO ** protocol:
+* receive udp packets from a socket
+* send udp packets to socket
+* handshake procedure
+* sending messages to the device
+* receiving responses from the device
+* device search (handshake-discovery)
+
+As an example of interaction with devices, a script for the command line `miio-cli.php` is written.
+Accepted parameters:
+  * `--discover all` - search for devices in the local network and display information about them
+  * `--discover IP` - check the availability of a specific device and display information about it
+  * `--info` - get information about the device (analogous to --discover IP)
+  * `--sendcmd` - send a command (in linux it should be enclosed in single quotes, in windows without them)
+  * `--decode` - decode package
+  * `--ip` - device IP address
+  * `--bindip` - IP-address of the server interface (optional if there is only one interface)
+  * `--token` - device token (optional)
+  * `--debug` - enables debug output
+  * `--help` - command help
+  
+
+
+
+Examples:
 ```php miio-cli.php --discover all
 php miio-cli.php --discover all --bindip 192.168.1.10
 php miio-cli.php --discover 192.168.1.45 --debug
